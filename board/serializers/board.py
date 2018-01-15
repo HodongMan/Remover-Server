@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..model import Board
+from ..models import Board
 
 class BoardSerializer(serializers.ModelSerializer):
 

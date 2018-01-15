@@ -6,7 +6,7 @@ class Comment(models.Model):
 
     board_id = models.ForeignKey(
         Board,
-        related_name='board',
+        related_name='board_comment',
         on_delete=models.CASCADE,
     )
     email = models.CharField(max_length=200)

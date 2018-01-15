@@ -6,7 +6,7 @@ class Comment(models.Model):
 
     board_id = models.ForeignKey(
         Board,
-        related_name = 'timeline_board',
+        related_name = 'timeline_board_comment',
         on_delete = models.CASCADE
     )
 

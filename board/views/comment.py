@@ -9,7 +9,7 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     name = 'comment-list'
 
-class commentDetail(generics.RetrieveUpdateDestroyAPIView):
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer

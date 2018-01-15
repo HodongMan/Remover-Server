@@ -6,7 +6,7 @@ class Like(models.Model):
 
     board_id = models.ForeignKey(
         Board,
-        related_name = 'timeline_board',
+        related_name = 'timeline_board_like',
         on_delete = models.CASCADE,
     )
     email = models.CharField(max_length=200)
