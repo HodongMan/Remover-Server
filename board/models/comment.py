@@ -4,7 +4,11 @@ from .board import Board
 
 class Comment(models.Model):
 
-    board_id = models.ForeignKey()
+    board_id = models.ForeignKey(
+        Board,
+        related_name='board',
+        on_delete=models.CASCADE,
+    )
     email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -15,4 +19,4 @@ class Comment(models.Model):
 
     class Meta:
 
-        ordering = ('-board_id', '-created')
+        ordering = ('-board_id', '-created',)

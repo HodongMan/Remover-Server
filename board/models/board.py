@@ -1,10 +1,14 @@
 from django.db import models
 
-from .models import Category
+from .category import Category
 
 class Board(models.Model):
 
-    category_id = models.ForeignKey()
+    category_id = models.ForeignKey(
+        Category,
+        related_name='category',
+        on_delete=models.CASCADE,
+    )
     email = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
@@ -19,5 +23,5 @@ class Board(models.Model):
 
     class Meta:
         
-        ordering = ('-created', '-title')
+        ordering = ('-created', '-title',)
 

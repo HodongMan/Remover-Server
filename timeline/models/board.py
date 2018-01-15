@@ -16,4 +16,4 @@ class Board(models.Model):
 
     class Meta:
 
-        ordering = ('-pk')
+        ordering = ('-pk',)

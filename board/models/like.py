@@ -4,9 +4,13 @@ from .board import Board
 
 class Like(models.Model):
 
-    board_id = models.ForeignKey()
-    email = models.CharField(max_lebgth=200)
+    board_id = models.ForeignKey(
+        Board,
+        related_name='board',
+        on_delete=models.CASCADE,
+    )
+    email = models.CharField(max_length=200)
 
     class Meta:
         
-        ordering = ('-board_id')
+        ordering = ('-board_id',)
