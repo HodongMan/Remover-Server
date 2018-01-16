@@ -13,7 +13,7 @@ class BoardSerializer(serializers.ModelSerializer):
             'name',
             'title',
             'description',
-            'vies',
+            'views',
             'image_url',
             'background_color',
             'color',

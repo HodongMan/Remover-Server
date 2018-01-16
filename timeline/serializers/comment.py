@@ -15,5 +15,5 @@ class CommentSerializer(serializers.ModelSerializer):
             'description',
 
             'created',
-            'udpated',
+            'updated',
         )

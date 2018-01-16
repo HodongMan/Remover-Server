@@ -6,7 +6,7 @@ class Board(models.Model):
     name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    vies = models.PositiveIntegerField()
+    views = models.PositiveIntegerField(default=0)
     image_url = models.CharField(max_length=200, default="")
     background_color = models.CharField(max_length=200, default="")
     color = models.CharField(max_length=200, default="")
