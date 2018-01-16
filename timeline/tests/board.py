@@ -1,3 +1,4 @@
+from json import dumps
 from django.test import TestCase, Client
 
 from ..models import Board
@@ -113,19 +114,19 @@ class BoardHttpTestCase(TestCase):
 
         self.assertEqual(http_result.status_code, 201)
 
-    """
+    
     def test_http_put_update_board(self):
 
-        http_result = self.test_client.put("/api/timeline/board/1/", {
+        http_result = self.test_client.put("/api/timeline/board/1/", dumps({
             "email" : "hodongGod@naver.com",
             "name" : "Arsenal",
             "title" : "만년 6위 아스날",
             "description" : "그들은 우승 하고 싶은 생각이 있긴 한가",
             "views" : 2,
-        })
+        }), content_type="application/json")
 
         self.assertEqual(http_result.status_code, 200)
-    """
+    
 
     def test_http_delete_board(self):
 
