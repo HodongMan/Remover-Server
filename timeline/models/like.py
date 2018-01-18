@@ -13,4 +13,4 @@ class Like(models.Model):
 
     class Meta:
 
-        ordering = ('-board_id',)
+        ordering = ('-board_id', '-pk',)
