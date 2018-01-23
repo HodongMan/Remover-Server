@@ -9,7 +9,7 @@ class LikeList(generics.ListCreateAPIView):
     serializer_class = LikeSerializer
     name = 'like-list'
 
-class LikeDetail(generics.RetrieveDestroyAPIView):
+class LikeDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
