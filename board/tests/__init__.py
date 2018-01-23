@@ -1,3 +1,3 @@
 from .category import CategoryTestCase, CategoryHttpTestCase
 from .board import BoardTestCase, BoardHttpTestCase
-from .comment import CommentTestCase
+from .comment import CommentTestCase, CommentHttpTestCase
