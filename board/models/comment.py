@@ -19,4 +19,4 @@ class Comment(models.Model):
 
     class Meta:
 
-        ordering = ('-board_id', '-created',)
+        ordering = ('board_id', '-created',)

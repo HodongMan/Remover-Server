@@ -1,5 +1,5 @@
 from json import dumps
-from datetime import datetime
+from django.utils import timezone
 from django.test import TestCase, Client
 
 from ..models import Category, Board
@@ -85,7 +85,7 @@ class BoardTestCase(TestCase):
 
         board_object = Board.objects.get(pk=2)
         board_object.description = "바뀐 내용입니다."
-        board_object.updated = datetime.now()
+        board_object.updated = timezone.now()
         board_object.save()
 
         board_list = Board.objects.all()
