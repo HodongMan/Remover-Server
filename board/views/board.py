@@ -1,6 +1,6 @@
 from rest_framework import generics
 
-from ..models import Board
+from ..models import Board, Like
 from ..serializers import BoardSerializer
 
 class BoardList(generics.ListCreateAPIView):
@@ -34,3 +34,15 @@ class BoardListByCategory(generics.ListAPIView):
     def get_queryset(self):
 
         return Board.objects.filter(category_id=self.kwargs['category'])
+
+class BoardListByLike(generics.ListAPIView):
+
+    queryset = Board.objects.all()
+    serializer_class = BoardSerializer
+    name = 'board-list-by-like'
+
+    def get_queryset(self):
+
+        like_result = Like.objects.filter(email = self.kwargs['user'])
+        like_result = [like.board_id for like in like_result]
+        return Board.objects.filter(id__in = like_result)
