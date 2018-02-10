@@ -91,21 +91,26 @@ class BoardHttpTestCase(TestCase):
 
     def test_http_get_list_board(self):
 
-        http_result = self.test_client.get("/api/timeline/board/")
+        http_result = self.test_client.get("/api/timeline/")
         
         self.assertEqual(http_result.status_code, 200)
     
     def test_http_get_retrieve_board(self):
 
-        http_result = self.test_client.get("/api/timeline/board/1/")
-        http_404_result = self.test_client.get("/api/timeline/board/3/")
+        http_result = self.test_client.get("/api/timeline/1/")
+        http_404_result = self.test_client.get("/api/timeline/3/")
 
         self.assertEqual(http_result.status_code, 200)
         self.assertEqual(http_404_result.status_code, 404)
 
+    def test_http_get_list_board_by_user(self):
+
+        http_result = self.test_client.get("/api/timeline/search/user/jhd9206@gmail.com/")
+        self.assertEqual(http_result.status_code, 200)
+
     def test_http_post_create_board(self):
 
-        http_result = self.test_client.post("/api/timeline/board/", {
+        http_result = self.test_client.post("/api/timeline/", {
             "email" : "hodongGod@naver.com",
             "name" : "Arsenal",
             "title" : "만년 6위 아스날",
@@ -117,7 +122,7 @@ class BoardHttpTestCase(TestCase):
     
     def test_http_put_update_board(self):
 
-        http_result = self.test_client.put("/api/timeline/board/1/", dumps({
+        http_result = self.test_client.put("/api/timeline/1/", dumps({
             "email" : "hodongGod@naver.com",
             "name" : "Arsenal",
             "title" : "만년 6위 아스날",
@@ -130,6 +135,6 @@ class BoardHttpTestCase(TestCase):
 
     def test_http_delete_board(self):
 
-        http_result = self.test_client.delete("/api/timeline/board/1/")
+        http_result = self.test_client.delete("/api/timeline/1/")
 
         self.assertEqual(http_result.status_code, 204)

@@ -23,14 +23,4 @@ class BoardListByUser(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(user=self.kwargs['user'])
-
-class BoardListByCategory(generics.ListAPIView):
-
-    queryset = Board.objects.all()
-    serializer_class = BoardSerializer
-    name = 'timeline-board-list-by-category'
-
-    def get_queryset(self):
-
-        return Board.objects.filter(category=self.kwargs['category'])
+        return Board.objects.filter(email=self.kwargs['user'])

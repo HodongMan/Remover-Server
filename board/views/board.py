@@ -23,7 +23,7 @@ class BoardListByUser(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(user=self.kwargs['user'])
+        return Board.objects.filter(email=self.kwargs['user'])
 
 class BoardListByCategory(generics.ListAPIView):
 
@@ -33,4 +33,4 @@ class BoardListByCategory(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(category=self.kwargs['category'])
+        return Board.objects.filter(category_id=self.kwargs['category'])

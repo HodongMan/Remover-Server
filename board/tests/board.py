@@ -145,24 +145,34 @@ class BoardHttpTestCase(TestCase):
 
     def test_http_get_list_board(self):
 
-        http_result = self._client.get("/api/board/board/")
+        http_result = self._client.get("/api/board/")
         self.assertEqual(http_result.status_code, 200)
 
     def test_http_get_retrieve_board(self):
 
-        http_result1 = self._client.get("/api/board/board/1/")
-        http_result2 = self._client.get("/api/board/board/2/")
-        http_result3 = self._client.get("/api/board/board/3/")
-        http_result4 = self._client.get("/api/board/board/4/")
+        http_result1 = self._client.get("/api/board/1/")
+        http_result2 = self._client.get("/api/board/2/")
+        http_result3 = self._client.get("/api/board/3/")
+        http_result4 = self._client.get("/api/board/4/")
 
         self.assertEqual(http_result1.status_code, 200)
         self.assertEqual(http_result2.status_code, 200)
         self.assertEqual(http_result3.status_code, 200)
         self.assertEqual(http_result4.status_code, 200)
 
+    def test_http_get_list_board_by_user(self):
+
+        http_result = self._client.get("/api/board/search/user/쩌리짱@teamnexters.com/")
+        self.assertEqual(http_result.status_code, 200)
+
+    def test_http_get_list_board_by_category(self):
+
+        http_result = self._client.get("/api/board/search/category/1/")
+        self.assertEqual(http_result.status_code, 200)
+
     def test_http_post_create_board(self):
 
-        http_result = self._client.post("/api/board/board/", {
+        http_result = self._client.post("/api/board/", {
             "category_id" : 1,
             "email" : "djangotest@test.com",
             "name" : "django.test",
@@ -173,7 +183,7 @@ class BoardHttpTestCase(TestCase):
 
     def test_http_put_update_board(self):
 
-        http_result = self._client.put("/api/board/board/1/", dumps({
+        http_result = self._client.put("/api/board/1/", dumps({
             "category_id" : 1,
             "email" : "djangotest2@test.com",
             "name" : "django.test2",
@@ -184,5 +194,5 @@ class BoardHttpTestCase(TestCase):
 
     def test_http_delete_board(self):
 
-        http_result = self._client.delete("/api/board/board/2/")
+        http_result = self._client.delete("/api/board/2/")
         self.assertEqual(http_result.status_code, 204)
