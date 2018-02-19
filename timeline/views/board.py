@@ -24,7 +24,7 @@ class BoardListByUser(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(email = self.kwargs['user'])
+        return Board.objects.filter(user = self.kwargs['user'])
 
 class BoardListByLike(generics.ListAPIView):
 
@@ -34,6 +34,6 @@ class BoardListByLike(generics.ListAPIView):
 
     def get_queryset(self):
 
-        like_result = Like.objects.filter(email = self.kwargs['user'])
+        like_result = Like.objects.filter(user = self.kwargs['user'])
         like_result = [like.board_id for like in like_result]
         return like_result

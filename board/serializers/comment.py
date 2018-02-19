@@ -10,7 +10,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'board_id',
-            'email',
+            'user',
             'name',
             'description',
             'created',

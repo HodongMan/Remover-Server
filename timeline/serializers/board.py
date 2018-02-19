@@ -12,9 +12,8 @@ class BoardSerializer(serializers.ModelSerializer):
         model = Board
         fields = (
             'pk',
-            'email',
+            'user',
             'name',
-            'title',
             'description',
             'views',
             'image_url',
@@ -33,7 +32,7 @@ class BoardSerializer(serializers.ModelSerializer):
     def get_is_liked(self, obj):
 
         try:
-            result = Like.objects.get(board_id = obj.id, email = obj.email)
+            result = Like.objects.get(board_id = obj.id, user = obj.user)
         except Like.DoesNotExist:
             result = None
         return result is not None

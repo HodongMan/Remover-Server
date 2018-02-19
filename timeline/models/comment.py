@@ -10,7 +10,7 @@ class Comment(models.Model):
         on_delete = models.CASCADE
     )
 
-    email = models.CharField(max_length=200)
+    user = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     description = models.TextField()
     

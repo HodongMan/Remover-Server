@@ -10,5 +10,5 @@ class LikeSerializer(serializers.ModelSerializer):
         fields = (
             'pk',
             'board_id',
-            'email',
+            'user',
         )

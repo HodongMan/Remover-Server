@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from json import dumps
 from django.test import TestCase, Client
 
@@ -8,22 +10,21 @@ class CommentTestCase(TestCase):
     def setUp(self):
 
         board_result = Board.objects.create(
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
 
         Comment.objects.create(
             board_id = board_result,
-            email = "wenger@arshenal.com",
+            user = "wenger@arshenal.com",
             name = "Wenger",
             description = "호동 산체스 대체자로 올래?",
         )
 
         Comment.objects.create(
             board_id = board_result,
-            email = "펩@manchestercity.com",
+            user = "펩@manchestercity.com",
             name = "펩",
             description = "아게로 팔건데 호동 올래?",
         )
@@ -50,7 +51,7 @@ class CommentTestCase(TestCase):
 
         Comment.objects.create(
             board_id = self.board_result,
-            email = "콘테@chelsea.com",
+            user = "콘테@chelsea.com",
             name = "콘테",
             description = "모라타 튜토리얼 가능하냐",
         )
@@ -86,22 +87,21 @@ class CommentHttpTestCase(TestCase):
     def setUp(self):
 
         board_result = Board.objects.create(
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
 
         Comment.objects.create(
             board_id = board_result,
-            email = "wenger@arshenal.com",
+            user = "wenger@arshenal.com",
             name = "Wenger",
             description = "호동 산체스 대체자로 올래?",
         )
 
         Comment.objects.create(
             board_id = board_result,
-            email = "펩@manchestercity.com",
+            user = "펩@manchestercity.com",
             name = "펩",
             description = "아게로 팔건데 호동 올래?",
         )
@@ -125,7 +125,7 @@ class CommentHttpTestCase(TestCase):
 
         http_response = self.test_client.post("/api/timeline/comment/", {
             "board_id" : 1,
-            "email" : "Hodong God@naver.com",
+            "user" : "Hodong God@naver.com",
             "name" : "장호동",
             "description" : "장호동이 짱이쥬",
         })
@@ -136,7 +136,7 @@ class CommentHttpTestCase(TestCase):
         
         http_response = self.test_client.put("/api/timeline/comment/1/", dumps({
             "board_id" : 1,
-            "email" : "hodongGod@naver.com",
+            "user" : "hodongGod@naver.com",
             "name" : "Arsenal",
             "description" : "그들은 우승 하고 싶은 생각이 있긴 한가",
         }), content_type="application/json")

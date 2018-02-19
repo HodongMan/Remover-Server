@@ -16,30 +16,26 @@ class BoardTestCase(TestCase):
         )
         Board.objects.create(
             category_id = self._category1,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         Board.objects.create(
             category_id = self._category1,
-            email = "jhd9206@gmail.com",
-            name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
+            user = "jhd9206@gmail.com",
+            name = "hodongGod",\
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Board.objects.create(
             category_id = self._category2,
-            email = "쩌리짱@teamnexters.com",
+            user = "쩌리짱@teamnexters.com",
             name = "넥터",
-            title = "넥터에서 개발중",
             description = "후 넥터에서 개발하기란 참으로 어려운건지 쉬운건지",
         )
         Board.objects.create(
             category_id = self._category2,
-            email = "hyeheon@nexters.com",
+            user = "hyeheon@nexters.com",
             name = "정해현",
-            title = "CEO님짱",
             description = "둥실때문에 그는 스트레스 받아 보인다",
         )
 
@@ -48,7 +44,6 @@ class BoardTestCase(TestCase):
         board_list = Board.objects.all()
 
         self.assertEqual(len(board_list), 4)
-        self.assertEqual(board_list[3].title, "테스트에 관하여")
         self.assertEqual(board_list[2].name, "hodongGod")
         self.assertEqual(board_list[1].name, "넥터")
         self.assertEqual(board_list[0].description, "둥실때문에 그는 스트레스 받아 보인다")
@@ -60,7 +55,6 @@ class BoardTestCase(TestCase):
         board_object3 = Board.objects.get(pk=3)
         board_object4 = Board.objects.get(pk=4)
 
-        self.assertEqual(board_object1.title, "테스트에 관하여")
         self.assertEqual(board_object2.name, "hodongGod")
         self.assertEqual(board_object3.name, "넥터")
         self.assertEqual(board_object4.description, "둥실때문에 그는 스트레스 받아 보인다")
@@ -69,16 +63,14 @@ class BoardTestCase(TestCase):
 
         board_object = Board.objects.create(
             category_id = self._category1,
-            email = "test@test.com",
+            user = "test@test.com",
             name = "테스트 유저",
-            title = "테스트 케이스 생성 중",
             description = "테스트를 하고 있는데 과연 이걸 하는게 맞나 싶구만",
         )
 
         board_list = Board.objects.all()
 
         self.assertEqual(len(board_list), 5)
-        self.assertEqual(board_object.title, "테스트 케이스 생성 중")
         self.assertEqual(board_list[0].description, board_object.description)
 
     def test_update_board_object(self):
@@ -115,30 +107,26 @@ class BoardHttpTestCase(TestCase):
         )
         Board.objects.create(
             category_id = self._category1,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         Board.objects.create(
             category_id = self._category1,
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Board.objects.create(
             category_id = self._category2,
-            email = "쩌리짱@teamnexters.com",
+            user = "쩌리짱@teamnexters.com",
             name = "넥터",
-            title = "넥터에서 개발중",
             description = "후 넥터에서 개발하기란 참으로 어려운건지 쉬운건지",
         )
         Board.objects.create(
             category_id = self._category2,
-            email = "hyeheon@nexters.com",
+            user = "hyeheon@nexters.com",
             name = "정해현",
-            title = "CEO님짱",
             description = "둥실때문에 그는 스트레스 받아 보인다",
         )
         self._client = Client()
@@ -174,9 +162,8 @@ class BoardHttpTestCase(TestCase):
 
         http_result = self._client.post("/api/board/", {
             "category_id" : 1,
-            "email" : "djangotest@test.com",
+            "user" : "djangotest@test.com",
             "name" : "django.test",
-            "title" : "unittest",
             "description" : "아 테스트 코드 짜는거 은근 개귀찮네",
         })
         self.assertEqual(http_result.status_code, 201)
@@ -185,9 +172,8 @@ class BoardHttpTestCase(TestCase):
 
         http_result = self._client.put("/api/board/1/", dumps({
             "category_id" : 1,
-            "email" : "djangotest2@test.com",
+            "user" : "djangotest2@test.com",
             "name" : "django.test2",
-            "title" : "unittest2",
             "description" : "아 테스트 코드 짜는거 은근 개귀찮네2",
         }), content_type="application/json")
         self.assertEqual(http_result.status_code, 200)

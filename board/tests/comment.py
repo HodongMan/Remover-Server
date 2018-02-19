@@ -13,39 +13,37 @@ class CommentTestCase(TestCase):
         )
         self._board1 = Board.objects.create(
             category_id = self._category,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         self._board2 = Board.objects.create(
             category_id = self._category,
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Comment.objects.create(
             board_id = self._board1,
-            email = "alexis@manchesterunited.com",
+            user = "alexis@manchesterunited.com",
             name = "alexis",
             description = "이적했다 개꿀"
         )
         Comment.objects.create(
             board_id = self._board1,
-            email = "mchitariyan@arsenal.com",
+            user = "mchitariyan@arsenal.com",
             name = "mchitariyan",
             description = "슈바 난 가기 싫었어"
         )
         Comment.objects.create(
             board_id = self._board2,
-            email = "deepflow@vmc.com",
+            user = "deepflow@vmc.com",
             name = "딥플로우",
             description = "deep is back"
         )
         Comment.objects.create(
             board_id = self._board2,
-            email = "던말릭@daysalllive.com",
+            user = "던말릭@daysalllive.com",
             name = "던말릭",
             description = "Old wave"
         )
@@ -58,7 +56,7 @@ class CommentTestCase(TestCase):
         self.assertEqual(comment_list[0].name, "던말릭")
         self.assertEqual(comment_list[1].name, "딥플로우")
         self.assertEqual(comment_list[2].description, "슈바 난 가기 싫었어")
-        self.assertEqual(comment_list[3].email, "alexis@manchesterunited.com")
+        self.assertEqual(comment_list[3].user, "alexis@manchesterunited.com")
 
     def test_get_retrieve_comment_object(self):
 
@@ -67,7 +65,7 @@ class CommentTestCase(TestCase):
         comment_object3 = Comment.objects.get(pk=3)
         comment_object4 = Comment.objects.get(pk=4)
 
-        self.assertEqual(comment_object1.email, "alexis@manchesterunited.com")
+        self.assertEqual(comment_object1.user, "alexis@manchesterunited.com")
         self.assertEqual(comment_object2.description, "슈바 난 가기 싫었어")
         self.assertEqual(comment_object3.name, "딥플로우")
         self.assertEqual(comment_object4.name, "던말릭")
@@ -76,7 +74,7 @@ class CommentTestCase(TestCase):
 
         created_comment = Comment.objects.create(
             board_id = self._board2,
-            email = "신관예우@daysalllive.com",
+            user = "신관예우@daysalllive.com",
             name = "딥플로우",
             description = "신관예우"
         )
@@ -118,39 +116,37 @@ class CommentHttpTestCase(TestCase):
         )
         board1 = Board.objects.create(
             category_id = category,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         board2 = Board.objects.create(
             category_id = category,
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Comment.objects.create(
             board_id = board1,
-            email = "alexis@manchesterunited.com",
+            user = "alexis@manchesterunited.com",
             name = "alexis",
             description = "이적했다 개꿀"
         )
         Comment.objects.create(
             board_id = board1,
-            email = "mchitariyan@arsenal.com",
+            user = "mchitariyan@arsenal.com",
             name = "mchitariyan",
             description = "슈바 난 가기 싫었어"
         )
         Comment.objects.create(
             board_id = board2,
-            email = "deepflow@vmc.com",
+            user = "deepflow@vmc.com",
             name = "딥플로우",
             description = "deep is back"
         )
         Comment.objects.create(
             board_id = board2,
-            email = "던말릭@daysalllive.com",
+            user = "던말릭@daysalllive.com",
             name = "던말릭",
             description = "Old wave"
         )
@@ -177,7 +173,7 @@ class CommentHttpTestCase(TestCase):
 
         http_response = self._client.post("/api/board/comment/", {
             "board_id" : 2,
-            "email" : "ozil@naver.com",
+            "user" : "ozil@naver.com",
             "name" : "메수트",
             "description" : "산체스 치사하게 지 혼자 가네"
         })
@@ -187,7 +183,7 @@ class CommentHttpTestCase(TestCase):
 
         http_response = self._client.put("/api/board/comment/1/", dumps({
             "board_id" : 2,
-            "email" : "ozil@naver.com",
+            "user" : "ozil@naver.com",
             "name" : "메수트",
             "description" : "산체스 치사하게 지 혼자 가네"
         }), content_type="application/json")

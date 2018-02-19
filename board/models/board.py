@@ -9,9 +9,8 @@ class Board(models.Model):
         related_name='category',
         on_delete=models.CASCADE,
     )
-    email = models.CharField(max_length=200)
+    user = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
-    title = models.CharField(max_length=200)
     description = models.TextField()
     views = models.PositiveIntegerField(default=0)
     image_url = models.CharField(max_length=200, default="")
@@ -23,5 +22,5 @@ class Board(models.Model):
 
     class Meta:
         
-        ordering = ('-created', '-title',)
+        ordering = ('-created',)
 

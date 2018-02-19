@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from json import dumps
 from django.test import TestCase, Client
 
@@ -8,16 +10,14 @@ class BoardTestCase(TestCase):
     def setUp(self):
 
         Board.objects.create(
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
 
         Board.objects.create(
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
 
@@ -27,7 +27,7 @@ class BoardTestCase(TestCase):
         
         self.assertEqual(len(board_list), 2)
         self.assertEqual(board_list[0].name, "hodongGod")
-        self.assertEqual(board_list[1].email, "arshavin3@naver.com")
+        self.assertEqual(board_list[1].user, "arshavin3@naver.com")
 
     def test_get_retrieve_board_object(self):
 
@@ -40,16 +40,14 @@ class BoardTestCase(TestCase):
     def test_create_board_object(self):
 
         new_board = Board.objects.create(
-            email = "hodongGod@naver.com",
-            name = "장호동",
-            title = "출근하기 싫다",
+            user = "hodongGod@naver.com",
+            name = "장호동",\
             description = "출근길 1시간 40분 너무한거 아니냐",
         )
 
         get_new_board = Board.objects.get(pk=3)
 
         self.assertEqual(new_board.description, get_new_board.description)
-        self.assertEqual(new_board.title, "출근하기 싫다")
 
     def test_update_board_object(self):
 
@@ -58,7 +56,7 @@ class BoardTestCase(TestCase):
         update_board.save()
 
         self.assertEqual(update_board.views, 1)
-        self.assertEqual(update_board.email, "jhd9206@gmail.com")
+        self.assertEqual(update_board.user, "jhd9206@gmail.com")
 
     def test_delete_board_object(self):
 
@@ -75,16 +73,14 @@ class BoardHttpTestCase(TestCase):
     def setUp(self):
         
         Board.objects.create(
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
 
         Board.objects.create(
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         self.test_client = Client()
@@ -111,9 +107,8 @@ class BoardHttpTestCase(TestCase):
     def test_http_post_create_board(self):
 
         http_result = self.test_client.post("/api/timeline/", {
-            "email" : "hodongGod@naver.com",
+            "user" : "hodongGod@naver.com",
             "name" : "Arsenal",
-            "title" : "만년 6위 아스날",
             "description" : "그들은 우승 하고 싶은 생각이 있긴 한가",
         })
 
@@ -123,9 +118,8 @@ class BoardHttpTestCase(TestCase):
     def test_http_put_update_board(self):
 
         http_result = self.test_client.put("/api/timeline/1/", dumps({
-            "email" : "hodongGod@naver.com",
+            "user" : "hodongGod@naver.com",
             "name" : "Arsenal",
-            "title" : "만년 6위 아스날",
             "description" : "그들은 우승 하고 싶은 생각이 있긴 한가",
             "views" : 2,
         }), content_type="application/json")

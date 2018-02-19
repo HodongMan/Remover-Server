@@ -13,43 +13,41 @@ class LikeTestCase(TestCase):
         )
         self._board1 = Board.objects.create(
             category_id = self._category,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         self._board2 = Board.objects.create(
             category_id = self._category,
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Like.objects.create(
             board_id = self._board1,
-            email = "hodonggod@net.com",
+            user = "hodonggod@net.com",
         )
         Like.objects.create(
             board_id = self._board1,
-            email = "hodonggod2@net.com",
+            user = "hodonggod2@net.com",
         )
         Like.objects.create(
             board_id = self._board2,
-            email = "hodonggod3@net.com",
+            user = "hodonggod3@net.com",
         )
         Like.objects.create(
             board_id = self._board2,
-            email = "hodonggod4@net.com",
+            user = "hodonggod4@net.com",
         )
 
     def test_get_list_like_object(self):
 
         like_list = Like.objects.all()
 
-        self.assertEqual(like_list[0].email, "hodonggod@net.com")
-        self.assertEqual(like_list[1].email, "hodonggod2@net.com")
-        self.assertEqual(like_list[2].email, "hodonggod3@net.com")
-        self.assertEqual(like_list[3].email, "hodonggod4@net.com")
+        self.assertEqual(like_list[0].user, "hodonggod@net.com")
+        self.assertEqual(like_list[1].user, "hodonggod2@net.com")
+        self.assertEqual(like_list[2].user, "hodonggod3@net.com")
+        self.assertEqual(like_list[3].user, "hodonggod4@net.com")
 
     def test_get_retrieve_like_object(self):
 
@@ -58,30 +56,30 @@ class LikeTestCase(TestCase):
         like_object3 = Like.objects.get(pk=3)
         like_object4 = Like.objects.get(pk=4)
 
-        self.assertEqual(like_object1.email, "hodonggod@net.com")
-        self.assertEqual(like_object2.email, "hodonggod2@net.com")
-        self.assertEqual(like_object3.email, "hodonggod3@net.com")
-        self.assertEqual(like_object4.email, "hodonggod4@net.com")
+        self.assertEqual(like_object1.user, "hodonggod@net.com")
+        self.assertEqual(like_object2.user, "hodonggod2@net.com")
+        self.assertEqual(like_object3.user, "hodonggod3@net.com")
+        self.assertEqual(like_object4.user, "hodonggod4@net.com")
 
     def test_create_like_object(self):
 
         Like.objects.create(
             board_id = self._board2,
-            email = "hodonggod5@net.com",
+            user = "hodonggod5@net.com",
         )
         like_object = Like.objects.get(pk=5)
         
-        self.assertEqual(like_object.email, "hodonggod5@net.com")
+        self.assertEqual(like_object.user, "hodonggod5@net.com")
 
     def test_update_like_object(self):
 
         update_like = Like.objects.get(pk=3)
-        update_like.email = "godhodong@naver.com"
+        update_like.user = "godhodong@naver.com"
         update_like.save()
 
         like_object = Like.objects.get(pk=3)
 
-        self.assertEqual(update_like.email, like_object.email)
+        self.assertEqual(update_like.user, like_object.user)
 
     def test_delete_like_object(self):
 
@@ -101,33 +99,31 @@ class LikeHttpTestCase(TestCase):
         )
         board1 = Board.objects.create(
             category_id = category,
-            email = "arshavin3@naver.com",
+            user = "arshavin3@naver.com",
             name = "hodong",
-            title = "테스트에 관하여",
             description = "테스트란 어떤 걸까",
         )
         board2 = Board.objects.create(
             category_id = category,
-            email = "jhd9206@gmail.com",
+            user = "jhd9206@gmail.com",
             name = "hodongGod",
-            title = "테스트는 해야 하는 것인가",
             description = "테스트는 해야 하는 것인가에 대하여 어렵구만",
         )
         Like.objects.create(
             board_id = board1,
-            email = "hodonggod@net.com",
+            user = "hodonggod@net.com",
         )
         Like.objects.create(
             board_id = board1,
-            email = "hodonggod2@net.com",
+            user = "hodonggod2@net.com",
         )
         Like.objects.create(
             board_id = board2,
-            email = "hodonggod3@net.com",
+            user = "hodonggod3@net.com",
         )
         Like.objects.create(
             board_id = board2,
-            email = "hodonggod4@net.com",
+            user = "hodonggod4@net.com",
         )
         self._client = Client()
 
@@ -152,7 +148,7 @@ class LikeHttpTestCase(TestCase):
 
         http_response = self._client.post("/api/board/like/", {
             "board_id" : 2,
-            "email" : "hodonggod2@net.com",
+            "user" : "hodonggod2@net.com",
         })
         self.assertEqual(http_response.status_code, 201)
 
@@ -160,7 +156,7 @@ class LikeHttpTestCase(TestCase):
 
         http_response = self._client.put("/api/board/like/1/", dumps({
             "board_id" : 1,
-            "email" : "hodonggod2@net.com",
+            "user" : "hodonggod2@net.com",
         }), content_type="application/json")
         self.assertEqual(http_response.status_code, 200)
 

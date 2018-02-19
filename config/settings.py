@@ -25,7 +25,9 @@ SECRET_KEY = '@s)qabodo&2)b%-i9!hm@^@mo+zb)t7wauy0r&9=m^qa4*h2#4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*"
+]
 
 
 # Application definition
@@ -79,9 +81,26 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cure',
+        'USER' : 'root',
+        'PASSWORD' : '1234',
+        'HOST' : '127.0.0.1',
+        'PORT' : '3306'
+    },
+    'test': {
+        'CHARSET': 'utf8',
+        'COLLATION': 'utf8_general_ci',
     }
+}
+
+# REST FRAMEWORK PAGINATION
+# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE' : 10,
 }
 
 
