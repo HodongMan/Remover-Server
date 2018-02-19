@@ -1,12 +1,14 @@
 from rest_framework import serializers
 
-from ..models import Board, Like
+from ..models import Board, Comment, Like
 
 
 class BoardSerializer(serializers.ModelSerializer):
 
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
+    comment_count = serializers.SerializerMethodField()
+    comment_list = serializers.SerializerMethodField()
 
     class Meta:
 
@@ -18,6 +20,8 @@ class BoardSerializer(serializers.ModelSerializer):
             'name',
             'description',
             'views',
+            'comment_count',
+            'comment_list',
             'image_url',
             'background_color',
             'color',
@@ -38,3 +42,11 @@ class BoardSerializer(serializers.ModelSerializer):
         except Like.DoesNotExist:
             result = None
         return result is not None
+
+    def get_comment_count(self, obj):
+
+        return Comment.objects.filter(board_id=obj.id).count()
+
+    def get_comment_list(self, obj):
+
+        return Comment.objects.filter(board_id=obj.id)
