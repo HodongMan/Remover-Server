@@ -7,7 +7,6 @@ class BoardSerializer(serializers.ModelSerializer):
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
-    comment_list = serializers.SerializerMethodField()
 
     class Meta:
         
@@ -19,7 +18,6 @@ class BoardSerializer(serializers.ModelSerializer):
             'description',
             'views',
             'comment_count',
-            'comment_list',
             'image_url',
             'background_color',
             'color',
@@ -44,7 +42,3 @@ class BoardSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
 
         return Comment.objects.filter(board_id=obj.id).count()
-
-    def get_comment_list(self, obj):
-
-        return Comment.objects.filter(board_id=obj.id)
