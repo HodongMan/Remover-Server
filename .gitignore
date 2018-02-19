@@ -88,5 +88,4 @@ local_settings.py
 
 .env
 .vscode
-migrations/
 db.sqlite3
