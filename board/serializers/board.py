@@ -21,7 +21,7 @@ class BoardSerializer(serializers.ModelSerializer):
             'views',
             'comment_count',
             'image_url',
-            'background_url',
+            'background_color',
             'color',
             'like_count',
             'is_liked',

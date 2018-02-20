@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
             'id',
             'title',
             'image_url',
-            'background_color',
+            'background_url',
             'color',
             'created',
         )
