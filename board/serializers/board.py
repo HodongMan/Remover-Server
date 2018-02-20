@@ -8,7 +8,6 @@ class BoardSerializer(serializers.ModelSerializer):
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
-    comment_list = serializers.SerializerMethodField()
 
     class Meta:
 
