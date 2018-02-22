@@ -53,7 +53,7 @@ class BoardListByCategoryAndLikeCount(generics.ListAPIView):
 
     def get_queryset(self):
 
-        queryset = Board.objects.raw("select * from board_board order by (select count(*) from board_like where board_board.id = board_like.board_id_id and board_board.category_id_id = %s) desc;", self.kwargs['category'])
+        queryset = Board.objects.raw("select * from board_board where board_board.category_id_id = %sorder by (select count(*) from board_like where board_board.id = board_like.board_id_id) desc;", self.kwargs['category'])
         return list(queryset)
 
 
