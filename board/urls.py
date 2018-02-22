@@ -8,6 +8,7 @@ from .views import (
     BoardListByLike,
     BoardListByCategory,
     BoardListByLikeCount,
+    BoardListByCategoryAndLikeCount,
 )
 from .views import CommentList, CommentDetail, CommentListByBoard
 from .views import LikeList, LikeDetail
@@ -17,6 +18,7 @@ urlpatterns = [
     path("<int:pk>/", BoardDetail.as_view(), name = BoardDetail.name),
     path("favorite/", BoardListByLikeCount.as_view(), name = BoardListByLikeCount.name),
     path("search/category/<str:category>/", BoardListByCategory.as_view(), name = BoardListByCategory.name),
+    path("search/category/favorite/<str:category>/", BoardListByCategoryAndLikeCount.as_view(), name = BoardListByCategoryAndLikeCount.name),
     path("search/user/<str:user>/", BoardListByUser.as_view(), name = BoardListByUser.name),
     path("search/comment/<int:board>/", CommentListByBoard.as_view(), name = CommentListByBoard.name),
     path('user/like/<str:user>/', BoardListByLike.as_view(), name = BoardListByLike.name),

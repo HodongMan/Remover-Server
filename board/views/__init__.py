@@ -5,6 +5,7 @@ from .board import (
     BoardListByLike,
     BoardListByCategory,
     BoardListByLikeCount,
+    BoardListByCategoryAndLikeCount,
 )
 from .category import CategoryList, CategoryDetail
 from .comment import CommentList, CommentDetail, CommentListByBoard
