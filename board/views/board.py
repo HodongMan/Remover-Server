@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import generics
 
 from ..models import Board, Like
@@ -24,6 +25,19 @@ class BoardListByUser(generics.ListAPIView):
     def get_queryset(self):
 
         return Board.objects.filter(user=self.kwargs['user'])
+
+class BoardListByLikeCount(generics.ListAPIView):
+
+    queryset = Board.objects.all()
+    serializer_class = BoardSerializer
+    name = 'bliard-list-by-like-count'
+
+    def get_queryset(self):
+
+        queryset = Board.objects.raw("select * from board_board order by (select count(*) from board_like where board_board.id = board_like.board_id_id) desc;")
+        return list(queryset)
+
+
 
 class BoardListByCategory(generics.ListAPIView):
 

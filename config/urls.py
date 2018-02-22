@@ -8,4 +8,5 @@ urlpatterns = [
     #path('api/user/', include('user.urls')),
     path('api/timeline/', include('timeline.urls')),
     path('api/board/', include('board.urls')),
+    path('api/boardimage/', include('board_image.urls')),
 ] + static(settings.STATIC_URL)

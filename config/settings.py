@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'timeline.apps.TimelineConfig',
     'board.apps.BoardConfig',
+    'board_image.apps.BoardImageConfig'
 ]
 
 MIDDLEWARE = [
