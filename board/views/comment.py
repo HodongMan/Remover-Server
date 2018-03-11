@@ -23,5 +23,4 @@ class CommentListByBoard(generics.ListAPIView):
 
     def get_queryset(self):
 
-        #return Comment.objects.filter(board_id=self.kwargs['board'])
-        return Comment.objects.all()
+        return Comment.objects.filter(board_id=self.kwargs['board'])
