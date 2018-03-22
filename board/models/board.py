@@ -1,16 +1,20 @@
 from django.db import models
 
 from .category import Category
+from user.models import User
 
 class Board(models.Model):
 
     category_id = models.ForeignKey(
         Category,
-        related_name='category',
+        related_name='category_board',
         on_delete=models.CASCADE,
     )
-    user = models.CharField(max_length=200)
-    name = models.CharField(max_length=200)
+    user = models.ForeignKey(
+        User,
+        related_name='user_board',
+        on_delete=models.CASCADE,
+    )
     description = models.TextField()
     views = models.PositiveIntegerField(default=0)
     image_url = models.CharField(max_length=200, default="")

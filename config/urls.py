@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/timeline/', include('timeline.urls')),
     path('api/board/', include('board.urls')),
     path('api/boardimage/', include('board_image.urls')),
+    path('api/profileimage/', include('profile_image.urls')),
 ] + static(settings.STATIC_URL)

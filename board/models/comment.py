@@ -1,6 +1,7 @@
 from django.db import models
 
 from .board import Board
+from user.models import User
 
 class Comment(models.Model):
 
@@ -9,7 +10,11 @@ class Comment(models.Model):
         related_name='board_comment',
         on_delete=models.CASCADE,
     )
-    user = models.CharField(max_length=200)
+    user = models.ForeignKey(
+        User,
+        related_name='user_comment',
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(max_length=200)
     description = models.TextField()
 
