@@ -10,3 +10,4 @@ from .board import (
 from .category import CategoryList, CategoryDetail
 from .comment import CommentList, CommentDetail, CommentListByBoard
 from .like import LikeList, LikeDetail
+from .comment_like import CommentLikeList, CommentLikeDetail

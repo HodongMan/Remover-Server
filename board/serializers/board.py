@@ -1,13 +1,15 @@
 from rest_framework import serializers
 
 from ..models import Board, Comment, Like
-
+from user.models import User
+from user.serializers import UserSerializer
 
 class BoardSerializer(serializers.ModelSerializer):
 
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
+    user = UserSerializer(read_only=True)
 
     class Meta:
 
@@ -15,9 +17,9 @@ class BoardSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'category_id',
-            'user',
-            'name',
             'description',
+            'user_id',
+            'user',
             'views',
             'comment_count',
             'image_url',
@@ -35,9 +37,12 @@ class BoardSerializer(serializers.ModelSerializer):
 
     def get_is_liked(self, obj):
 
+        request = self.context['request']
+        
         try:
-            result = Like.objects.get(board_id = obj.id, user = obj.user)
-        except Like.DoesNotExist:
+            user = request.query_params['user']
+            result = Like.objects.get(board_id = obj.id, user = user)
+        except:
             result = None
         return result is not None
 

@@ -10,12 +10,11 @@ class Comment(models.Model):
         related_name='board_comment',
         on_delete=models.CASCADE,
     )
-    user = models.ForeignKey(
+    user_id = models.ForeignKey(
         User,
         related_name='user_comment',
         on_delete=models.CASCADE,
     )
-    name = models.CharField(max_length=200)
     description = models.TextField()
 
     created = models.DateTimeField(auto_now_add=True)

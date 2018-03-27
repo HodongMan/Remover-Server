@@ -10,7 +10,7 @@ class Board(models.Model):
         related_name='category_board',
         on_delete=models.CASCADE,
     )
-    user = models.ForeignKey(
+    user_id = models.ForeignKey(
         User,
         related_name='user_board',
         on_delete=models.CASCADE,

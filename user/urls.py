@@ -9,5 +9,5 @@ from .views import (
 urlpatterns = [
     path('', UserList.as_view(), name = UserList.name),
     path('<str:user>/', UserInfo.as_view(), name = UserInfo.name),
-    path('<int:pk>/', UserDetail.as_view(), name = UserDetail.name),
+    path('<str:pk>/', UserDetail.as_view(), name = UserDetail.name),
 ]
