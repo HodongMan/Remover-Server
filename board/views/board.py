@@ -32,7 +32,7 @@ class BoardListByUser(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(user=self.kwargs['user'])
+        return Board.objects.filter(user_id=self.kwargs['user'])
 
 class BoardListByLikeCount(generics.ListAPIView):
 
