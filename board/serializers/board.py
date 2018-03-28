@@ -9,8 +9,8 @@ class BoardSerializer(serializers.ModelSerializer):
     like_count = serializers.SerializerMethodField()
     is_liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
-    user = UserSerializer(read_only=True)
-
+    user_id = UserSerializer(read_only=True)
+    
     class Meta:
 
         model = Board
@@ -19,7 +19,6 @@ class BoardSerializer(serializers.ModelSerializer):
             'category_id',
             'description',
             'user_id',
-            'user',
             'views',
             'comment_count',
             'image_url',
@@ -30,6 +29,13 @@ class BoardSerializer(serializers.ModelSerializer):
             'created',
             'updated',
         )
+
+    def create(self, validated_data):
+        
+        user = self.context['request'].query_params['user']
+        validated_data['user_id'] = User.objects.get(user=user)
+        return Board.objects.create(**validated_data)
+     
 
     def get_like_count(self, obj):
 
