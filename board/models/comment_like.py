@@ -14,3 +14,4 @@ class CommentLike(models.Model):
     class Meta:
         
         ordering = ('-comment_id',)
+        unique_together = (('comment_id', 'user'),)

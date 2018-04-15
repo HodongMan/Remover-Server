@@ -8,6 +8,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     like_count = serializers.SerializerMethodField()
     user_id = UserSerializer(read_only=True)
+    is_liked = serializers.SerializerMethodField()
 
     class Meta:
 
@@ -18,6 +19,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'user_id',
             'description',
             'like_count',
+            'is_liked',
             'created',
             'updated',
         )
@@ -31,3 +33,14 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_like_count(self, obj):
 
         return CommentLike.objects.filter(comment_id=obj.id).count()
+
+    def get_is_liked(self, obj):
+
+        request = self.context['request']
+        
+        try:
+            user = request.query_params['user']
+            result = CommentLike.objects.get(board_id = obj.id, user = user)
+        except:
+            result = None
+        return result is not None

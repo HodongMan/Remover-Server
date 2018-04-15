@@ -14,3 +14,4 @@ class Like(models.Model):
     class Meta:
         
         ordering = ('-board_id',)
+        unique_together = (('board_id', 'user'),)
