@@ -40,7 +40,7 @@ class CommentSerializer(serializers.ModelSerializer):
         
         try:
             user = request.query_params['user']
-            result = CommentLike.objects.get(board_id = obj.id, user = user)
+            result = CommentLike.objects.get(comment_id = obj.id, user = user)
         except:
             result = None
         return result is not None
