@@ -76,6 +76,6 @@ class BoardListByLike(generics.ListAPIView):
 
     def get_queryset(self):
 
-        like_result = Like.objects.filter(user = self.kwargs['user']).order_by('id')
+        like_result = Like.objects.filter(user = self.kwargs['user']).order_by('-id')
         like_result = [like.board_id for like in like_result]
         return like_result
