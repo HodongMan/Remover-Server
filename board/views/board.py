@@ -32,7 +32,7 @@ class BoardListByUser(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(user_id=self.kwargs['user']).order_by('-board_id')
+        return Board.objects.filter(user_id=self.kwargs['user']).order_by('-id')
 
 class BoardListByLikeCount(generics.ListAPIView):
 
@@ -66,7 +66,7 @@ class BoardListByCategory(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.filter(category_id=self.kwargs['category']).order_by('-board_id')
+        return Board.objects.filter(category_id=self.kwargs['category']).order_by('-id')
 
 class BoardListByLike(generics.ListAPIView):
 
@@ -76,6 +76,6 @@ class BoardListByLike(generics.ListAPIView):
 
     def get_queryset(self):
 
-        like_result = Like.objects.filter(user = self.kwargs['user']).order_by('-board_id')
+        like_result = Like.objects.filter(user = self.kwargs['user']).order_by('id')
         like_result = [like.board_id for like in like_result]
         return like_result
