@@ -11,7 +11,7 @@ class UserInfo(generics.RetrieveAPIView):
 
     def get_object(self):
 
-        like_count = Like.objects.raw("select * from board_like where board_like.board_id_id in (select id from board_board where user = %s)", [self.kwargs['user'],])
+        like_count = Like.objects.raw("select * from board_like where board_like.board_id_id in (select id from board_board where user_id_id = %s)", [self.kwargs['user'],])
         like_count = (len(list(like_count)))
         board_count = Board.objects.filter(user_id=self.kwargs['user']).count()
         user_info = User.objects.get(user=self.kwargs['user'])
