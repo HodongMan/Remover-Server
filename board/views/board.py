@@ -78,4 +78,4 @@ class BoardListByLike(generics.ListAPIView):
 
         like_result = Like.objects.filter(user = self.kwargs['user'])
         like_result = [like.board_id for like in like_result]
-        return Board.objects.filter(id__in = like_result)
+        return like_result

@@ -9,5 +9,5 @@ from .board import (
 )
 from .category import CategoryList, CategoryDetail
 from .comment import CommentList, CommentDetail, CommentListByBoard
-from .like import LikeList, LikeDetail
+from .like import LikeList, LikeDetail, LikeDestroyByUser
 from .comment_like import CommentLikeList, CommentLikeDetail

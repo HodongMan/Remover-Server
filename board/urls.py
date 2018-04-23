@@ -11,7 +11,7 @@ from .views import (
     BoardListByCategoryAndLikeCount,
 )
 from .views import CommentList, CommentDetail, CommentListByBoard
-from .views import LikeList, LikeDetail
+from .views import LikeList, LikeDetail, LikeDestroyByUser
 from .views import CommentLikeList, CommentLikeDetail
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     path("comment/<int:pk>/", CommentDetail.as_view(), name = CommentDetail.name),
     path("like/", LikeList.as_view(), name = LikeList.name),
     path("like/<int:pk>/", LikeDetail.as_view(), name = LikeDetail.name),
+    path("like/<str:user>/<int:board>/", LikeDestroyByUser.as_view(), name = LikeDestroyByUser.name),
     path("comment/like/", CommentLikeList.as_view(), name = CommentLikeList.name),
     path("comment/like/<int:pk>/", CommentLikeDetail.as_view(), name = CommentLikeDetail.name),
 ]
