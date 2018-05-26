@@ -12,7 +12,7 @@ from .views import (
 )
 from .views import CommentList, CommentDetail, CommentListByBoard
 from .views import LikeList, LikeDetail, LikeDestroyByUser
-from .views import CommentLikeList, CommentLikeDetail
+from .views import CommentLikeList, CommentLikeDetail, CommentLikeDestroyByUser
 
 urlpatterns = [
     path("", BoardList.as_view(), name = BoardList.name),
@@ -32,4 +32,5 @@ urlpatterns = [
     path("like/<str:user>/<int:board>/", LikeDestroyByUser.as_view(), name = LikeDestroyByUser.name),
     path("comment/like/", CommentLikeList.as_view(), name = CommentLikeList.name),
     path("comment/like/<int:pk>/", CommentLikeDetail.as_view(), name = CommentLikeDetail.name),
+    path("comment/like/<str:user>/<int:board>/", CommentLikeDestroyByUser.as_view(), name = CommentLikeDestroyByUser.name),
 ]

@@ -14,3 +14,14 @@ class CommentLikeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = CommentLike.objects.all()
     serializer_class = CommentLikeSerializer
     name = 'comment-like-detail'
+
+class CommentLikeDestroyByUser(generics.DestroyAPIView):
+
+    queryset = CommentLike.objects.all()
+    serializer_class = CommentLikeSerializer
+    name = 'comment-like-destroy-by-user'
+
+    def get_object(self):
+
+        like_result = CommentLike.objects.get(user = self.kwargs['user'], comment_id = self.kwargs['board'])
+        return like_result
