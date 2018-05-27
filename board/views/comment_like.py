@@ -23,5 +23,5 @@ class CommentLikeDestroyByUser(generics.DestroyAPIView):
 
     def get_object(self):
 
-        like_result = CommentLike.objects.get(user = self.kwargs['user'], comment_id = self.kwargs['board'])
+        like_result = CommentLike.objects.get(user = self.kwargs['user'], comment_id = self.kwargs['comment'])
         return like_result

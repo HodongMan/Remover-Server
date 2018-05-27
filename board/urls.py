@@ -32,5 +32,5 @@ urlpatterns = [
     path("like/<str:user>/<int:board>/", LikeDestroyByUser.as_view(), name = LikeDestroyByUser.name),
     path("comment/like/", CommentLikeList.as_view(), name = CommentLikeList.name),
     path("comment/like/<int:pk>/", CommentLikeDetail.as_view(), name = CommentLikeDetail.name),
-    path("comment/like/<str:user>/<int:board>/", CommentLikeDestroyByUser.as_view(), name = CommentLikeDestroyByUser.name),
+    path("comment/like/<str:user>/<int:comment>/", CommentLikeDestroyByUser.as_view(), name = CommentLikeDestroyByUser.name),
 ]
