@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/board/', include('board.urls')),
     path('api/boardimage/', include('board_image.urls')),
     path('api/profileimage/', include('profile_image.urls')),
+    path('api/blacklist/', include('blacklist.urls')),
+    path('api/declare/', include('declare.urls')),
 ] + static(settings.STATIC_URL)
