@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'board.apps.BoardConfig',
     'board_image.apps.BoardImageConfig',
     'profile_image.apps.ProfileImageConfig',
+    'blacklist.apps.BlacklistConfig',
+    'declare.apps.DeclareConfig',
 ]
 
 MIDDLEWARE = [

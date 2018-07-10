@@ -2,6 +2,8 @@ from rest_framework import generics
 
 from .serializers import UserInfoSerializer, UserSerializer
 from .models import User
+from blacklist.models import BlackList
+
 from board.models import Board, Like
 
 class UserInfo(generics.RetrieveAPIView):
@@ -29,6 +31,12 @@ class UserList(generics.ListCreateAPIView):
     serializer_class = UserSerializer
     name = 'user-list'
 
+    def get_object(self):
+        user_info = BlackList.objects.get(user=self.kwargs['pk'])
+        if user_info is None:
+            return True
+        else:
+            return False
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
