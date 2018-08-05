@@ -10,6 +10,7 @@ class DeclareSerializer(serializers.ModelSerializer):
             'pk',
             'user',
             'title',
+            "board_id",
             'description',
             'created'
         )
