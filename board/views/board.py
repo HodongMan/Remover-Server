@@ -10,6 +10,10 @@ class BoardList(generics.ListCreateAPIView):
     serializer_class = BoardSerializer
     name = 'board-list'
 
+    def get_queryset(self):
+
+        return Board.objects.order_by('?')
+
 class BoardDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Board.objects.all()
