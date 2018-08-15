@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/profileimage/', include('profile_image.urls')),
     path('api/blacklist/', include('blacklist.urls')),
     path('api/declare/', include('declare.urls')),
+    path('api/block/', include('block.urls')),
 ] + static(settings.STATIC_URL)

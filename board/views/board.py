@@ -3,6 +3,7 @@ from rest_framework import generics
 
 from ..models import Board, Like
 from ..serializers import BoardSerializer
+from block.models import BlockUser
 
 class BoardList(generics.ListCreateAPIView):
 
@@ -12,7 +13,7 @@ class BoardList(generics.ListCreateAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.order_by('?')
+        return Board.objects.exclude(user__in=BlockUser.objects.filter(from_user=self.request.query_params['user'])).order_by('?')
 
 class BoardDetail(generics.RetrieveUpdateDestroyAPIView):
 

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'profile_image.apps.ProfileImageConfig',
     'blacklist.apps.BlacklistConfig',
     'declare.apps.DeclareConfig',
+    'block.apps.BlockConfig',
 ]
 
 MIDDLEWARE = [
