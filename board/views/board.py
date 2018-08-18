@@ -13,7 +13,15 @@ class BoardList(generics.ListCreateAPIView):
 
     def get_queryset(self):
 
-        return Board.objects.exclude(user__in=BlockUser.objects.filter(from_user=self.request.query_params['user'])).order_by('?')
+        if self.request.query_params['user']:
+            block_user = None## = BlockUser.objects.filter(from_user=self.request.query_params['user'])
+            if block_user is not None:
+                return Board.objects.exclude(user_id__in=BlockUser.objects.filter(from_user=block_user)).order_by('?')
+            else:
+                return Board.objects.order_by('?')    
+        else:
+            return Board.objects.order_by('?')
+
 
 class BoardDetail(generics.RetrieveUpdateDestroyAPIView):
 
