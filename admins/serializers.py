@@ -15,6 +15,7 @@ class NormalBoardSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'category_id',
+            'user_id',
             'description',
             'views',
             'comment_count',
@@ -33,3 +34,11 @@ class NormalBoardSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
 
         return Comment.objects.filter(board_id=obj.id).count()
+
+
+class BoardDataCountSerializer(serializers.Serializer):
+
+    board_count = serializers.IntegerField()
+    comment_count = serializers.IntegerField()
+    last_month_board_count = serializers.IntegerField()
+    last_day_board_count = serializers.IntegerField()
