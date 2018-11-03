@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/blacklist/', include('blacklist.urls')),
     path('api/declare/', include('declare.urls')),
     path('api/block/', include('block.urls')),
+    path('api/admin/', include('admins.urls')),
 ] + static(settings.STATIC_URL)

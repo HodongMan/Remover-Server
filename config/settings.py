@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'blacklist.apps.BlacklistConfig',
     'declare.apps.DeclareConfig',
     'block.apps.BlockConfig',
+    'admins.apps.AdminsConfig',
 ]
 
 MIDDLEWARE = [
