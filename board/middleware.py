@@ -43,6 +43,10 @@ class BlockUserDenyMiddleware:
     def process_response(self, request, response):
 
         path = request.path_info.lstrip("/")
+        
+        if len(request.body) == 0:
+            return response
+        
         body = eval(request.body)
 
         user = ""
