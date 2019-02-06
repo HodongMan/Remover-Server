@@ -33,37 +33,32 @@ class BlockUserDenyMiddleware:
 
         return response
 
-    def process_view(self, request, view_func, view_args, view_kwargs):
-
-        response = view_func(request, *view_args, **view_kwargs)
-        print(request.content_params)
-        print('hodong3')
-
-
     def process_request(self, request):
         
-        body = str(request.POST.dict())
-        print(body)
-        
-        if 'application/json' in request.META['CONTENT_TYPE']:
-            # load the json data
-            
-            pass
-
-        print('hodong')
+        data = getattr(request, '_body', request.body)
+        request._body = data
 
         return None
 
     def process_response(self, request, response):
 
         path = request.path_info.lstrip("/")
-        print('hodong2')
+        body = eval(request.body)
+
+        user = ""
+
+        if 'user' in body:
+            user = body['user']
+        elif 'user_id' in body:
+            user = body['user_id']
+        elif 'user_id_id' in body:
+            user = body['user_id_id']
 
         valid_urls = (url.match(path) for url in self.API_URLS)
 
         if request.method in self.METHOD and any(valid_urls):
 
-            is_blacklist = BlackList.objects.filter(user="hodong")
+            is_blacklist = BlackList.objects.filter(user=user)
           
             if len(is_blacklist) != 0:
 
