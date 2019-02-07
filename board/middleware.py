@@ -43,7 +43,7 @@ class BlockUserDenyMiddleware:
     def process_response(self, request, response):
 
         path = request.path_info.lstrip("/")
-        
+        """
         if len(request.body) == 0:
             return response
         
@@ -67,5 +67,5 @@ class BlockUserDenyMiddleware:
             if len(is_blacklist) != 0:
 
                 return HttpResponseForbidden()
-
+        """
         return response
