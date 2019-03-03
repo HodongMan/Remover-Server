@@ -11,14 +11,13 @@ from blacklist.models import BlackList
 
 class BlockUserDenyMiddleware:
  
-    METHOD = ("POST", "PUT", "DELETE")
+    METHOD = ("GET")
     
     def __init__(self, get_response):
 
         self.get_response = get_response
         self.API_URLS = [
-            re.compile(r'^(.*)/api'),
-            re.compile(r'^api'),
+            re.compile(r'/api/user'),
         ]
     
     def __call__(self, request):
@@ -43,31 +42,14 @@ class BlockUserDenyMiddleware:
     def process_response(self, request, response):
 
         path = request.path_info.lstrip("/")
-        
-        request._body = request._body.decode("utf-8")
-
-        user=""
-
-        if len(request._body) == 0:
-            return response
-
-        if 'user' in request._body:
-            attr_name = 'user'
-            attr_index = request._body.find(attr_name)
-
-        elif 'user_id' in request._body:
-            attr_name = 'user_id'
-            attr_index = request._body.find(attr_name)
-
-        elif 'user_id_id' in request._body:
-            attr_name = 'user_id_id'
+    
+        id = path[9:-1]
 
         valid_urls = (url.match(path) for url in self.API_URLS)
 
-        if request.method in self.METHOD and any(valid_urls):
-
-            is_blacklist = BlackList.objects.filter(user="hodong")
-          
+        if 'api/user' in path:
+            is_blacklist = BlackList.objects.filter(user=id)
+            print(is_blacklist)
             if len(is_blacklist) != 0:
 
                 return HttpResponseForbidden()
