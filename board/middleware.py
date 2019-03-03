@@ -43,29 +43,33 @@ class BlockUserDenyMiddleware:
     def process_response(self, request, response):
 
         path = request.path_info.lstrip("/")
-        """
-        if len(request.body) == 0:
-            return response
         
-        body = eval(request.body)
+        request._body = request._body.decode("utf-8")
 
-        user = ""
+        user=""
 
-        if 'user' in body:
-            user = body['user']
-        elif 'user_id' in body:
-            user = body['user_id']
-        elif 'user_id_id' in body:
-            user = body['user_id_id']
+        if len(request._body) == 0:
+            return response
+
+        if 'user' in request._body:
+            attr_name = 'user'
+            attr_index = request._body.find(attr_name)
+
+        elif 'user_id' in request._body:
+            attr_name = 'user_id'
+            attr_index = request._body.find(attr_name)
+
+        elif 'user_id_id' in request._body:
+            attr_name = 'user_id_id'
 
         valid_urls = (url.match(path) for url in self.API_URLS)
 
         if request.method in self.METHOD and any(valid_urls):
 
-            is_blacklist = BlackList.objects.filter(user=user)
+            is_blacklist = BlackList.objects.filter(user="hodong")
           
             if len(is_blacklist) != 0:
 
                 return HttpResponseForbidden()
-        """
+        
         return response
